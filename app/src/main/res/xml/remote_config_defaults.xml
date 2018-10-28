@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?><!-- START xml_defaults -->
+<defaultsMap>
+
+    <entry>
+        <key>inbuilt_notification_day_count</key>
+        <value>3</value>
+    </entry>
+
+    <entry>
+        <key>android_latest_version_code</key>
+        <value>49</value>
+    </entry>
+
+    <entry>
+        <key>update_app_description</key>
+        <value>Dear user, we have updated the app with many improvements . Please update the app to avail new features and enhanced security.</value>
+    </entry>
+
+</defaultsMap>

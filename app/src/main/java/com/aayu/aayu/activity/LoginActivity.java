@@ -108,6 +108,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInAnonymously:success");
+                            mRef = mRoot.child("users").child(uid);
+                            mRef.setValue("auth_id",mAuth.getCurrentUser().getUid().toString());
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             FirebaseUser user = mAuth.getCurrentUser();
                         } else {
