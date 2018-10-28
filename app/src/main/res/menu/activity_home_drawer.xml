@@ -5,24 +5,20 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:title="Add caption"
-            android:id="@+id/contribution"
-            android:visible="false"/>
-        <item
             android:id="@+id/nav_rate"
-            android:title="Rate" />
+            android:title="About us" />
         <item
             android:id="@+id/nav_app"
             android:title="More Apps" />
         <item
-            android:id="@+id/nav_settings"
-            android:title="Settings" />
-        <item
             android:title="What's new"
             android:id="@+id/newUpdate"/>
         <item
+            android:id="@+id/nav_settings"
+            android:title="Settings" />
+        <item
             android:id="@+id/updates"
-            android:title="Up to date"/>
+            android:title="SOS"/>
     </group>
 
 </menu>
