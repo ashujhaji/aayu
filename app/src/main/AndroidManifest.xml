@@ -39,9 +39,13 @@
             android:name=".activity.MedicinesActivity"
             android:label="Medicines"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.DoctorsActivity"
+        <activity
+            android:name=".activity.DoctorsActivity"
             android:label="Doctors"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.CghsActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="Nearby CGHS"/>
     </application>
 
 </manifest>

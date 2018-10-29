@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private DrawerLayout drawer;
     private FirebaseRemoteConfig firebaseRemoteConfig;
     private ImageView tip_img;
-    private CardView prescription, medicines, doctors;
+    private CardView prescription, medicines, doctors, cghs;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         prescription = findViewById(R.id.prescription);
         medicines = findViewById(R.id.medicines);
         doctors = findViewById(R.id.doctors);
+        cghs = findViewById(R.id.cghs);
 
         remoteConfigData();
 
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         prescription.setOnClickListener(this);
         medicines.setOnClickListener(this);
         doctors.setOnClickListener(this);
+        cghs.setOnClickListener(this);
 
         //navigation drawer setup
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -96,6 +98,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.doctors:
                 startActivity(new Intent(MainActivity.this, DoctorsActivity.class));
+                break;
+            case R.id.cghs:
+                startActivity(new Intent(MainActivity.this, CghsActivity.class));
                 break;
         }
     }

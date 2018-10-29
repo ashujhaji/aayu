@@ -2,19 +2,19 @@ package com.aayu.aayu.activity;
 
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
 
-import com.aayu.aayu.Model.Doctors;
+import com.aayu.aayu.Model.Cghs;
 import com.aayu.aayu.Model.Medicines;
 import com.aayu.aayu.R;
-import com.aayu.aayu.adapters.DoctorsAdapter;
+import com.aayu.aayu.adapters.CghsAdapter;
 import com.aayu.aayu.adapters.MedicineAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,15 +25,17 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DoctorsActivity extends AppCompatActivity {
-    private List<Doctors> doctors = new ArrayList<>();
+public class CghsActivity extends AppCompatActivity {
+
+    private List<Cghs> list = new ArrayList<>();
     private DatabaseReference mroot, mRef;
     private ProgressBar progress;
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_doctors);
+        setContentView(R.layout.activity_cghs);
 
         //set toolbar
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
@@ -48,26 +50,23 @@ public class DoctorsActivity extends AppCompatActivity {
 
         progress = findViewById(R.id.progress);
 
-        doctorList();
+        cghsList();
     }
 
-    private void doctorList(){
+    private void cghsList(){
         progress.setVisibility(View.VISIBLE);
-        mRef = mroot.child("doctors");
+        mRef = mroot.child("cghs");
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
                 for ( DataSnapshot child: children){
-                    doctors.add(new Doctors(child.child("field6").getValue().toString(),
-                            child.child("field8").getValue().toString(),
-                            child.child("field10").getValue().toString(),
-                            child.child("field7").getValue().toString(),
-                            child.child("field9").getValue().toString(),
-                            child.child("field11").getValue().toString()));
+                    list.add(new Cghs(child.child("field1").getValue().toString(),
+                                    child.child("field2").getValue().toString(),
+                                    child.child("field3").getValue().toString()));
                 }
 
-                getRecyclerView(R.id.recycler,new DoctorsAdapter(doctors, DoctorsActivity.this));
+                getRecyclerView(R.id.recycler,new CghsAdapter(list,CghsActivity.this));
             }
 
             @Override
@@ -79,7 +78,7 @@ public class DoctorsActivity extends AppCompatActivity {
 
     private void getRecyclerView(int recyclerview_category, RecyclerView.Adapter adapter) {
         RecyclerView mRecyclerView = findViewById(recyclerview_category);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(DoctorsActivity.this);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(CghsActivity.this);
         mRecyclerView.setLayoutManager(mLayoutManager);                                                            //todo : recyclerView method
         mRecyclerView.setAdapter(adapter);
 

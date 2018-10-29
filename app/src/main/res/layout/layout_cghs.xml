@@ -15,11 +15,11 @@
             android:layout_weight="3"
             android:layout_gravity="center_vertical">
             <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
-                app:srcCompat="@drawable/doctors"/>
+                app:srcCompat="@drawable/loaction"/>
         </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,45 +28,28 @@
             android:layout_weight="1"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp">
-           <TextView
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:text="Dr.Subrito Mukherjee"
-               android:layout_marginLeft="10dp"
-               android:textColor="@color/grey_800"
-               android:id="@+id/name"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Eye Specialist"
-                android:textSize="11dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/grey_800"
+                android:id="@+id/name"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
                 android:layout_marginLeft="10dp"
                 android:textColor="@color/grey_20"
-                android:id="@+id/spec"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:id="@+id/timing"
-                    android:gravity="center"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:id="@+id/days"
-                    android:gravity="center"/>
-            </LinearLayout>
+                android:id="@+id/cghs_address"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Lajpat Nagar,A-3,delhi-110067"
                 android:textSize="12dp"
                 android:layout_marginLeft="10dp"
-                android:id="@+id/place"/>
-    </LinearLayout>
+                android:id="@+id/contact"/>
+        </LinearLayout>
     </LinearLayout>
 </android.support.v7.widget.CardView>
