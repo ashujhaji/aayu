@@ -20,4 +20,6 @@
     <color name="yellow">#ffea00</color>
     <color name="color_light_text">#bdbdbd</color>
     <color name="light_green_600">#7CB342</color>
+
+    <color name="red">#FF0000</color>
 </resources>

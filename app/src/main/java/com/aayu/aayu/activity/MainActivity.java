@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.aayu.aayu.BuildConfig;
+import com.aayu.aayu.Model.Medicines;
 import com.aayu.aayu.R;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private DrawerLayout drawer;
     private FirebaseRemoteConfig firebaseRemoteConfig;
     private ImageView tip_img;
+    private CardView prescription, medicines, doctors;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -45,11 +48,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         drawer = findViewById(R.id.drawer_layout);
         profile = findViewById(R.id.profile);
         tip_img = findViewById(R.id.tip_img);
+        prescription = findViewById(R.id.prescription);
+        medicines = findViewById(R.id.medicines);
+        doctors = findViewById(R.id.doctors);
 
         remoteConfigData();
 
         nav_drawer.setOnClickListener(this);
         profile.setOnClickListener(this);
+        prescription.setOnClickListener(this);
+        medicines.setOnClickListener(this);
+        doctors.setOnClickListener(this);
 
         //navigation drawer setup
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -78,6 +87,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.profile:
                 startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                break;
+            case R.id.prescription:
+                startActivity(new Intent(MainActivity.this, PrescriptionActivity.class));
+                break;
+            case R.id.medicines:
+                startActivity(new Intent(MainActivity.this, MedicinesActivity.class));
+                break;
+            case R.id.doctors:
+                startActivity(new Intent(MainActivity.this, DoctorsActivity.class));
                 break;
         }
     }

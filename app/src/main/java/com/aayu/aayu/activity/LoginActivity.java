@@ -1,6 +1,7 @@
 package com.aayu.aayu.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,6 +34,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private List<String> users = new ArrayList<>();
     private FirebaseAuth mAuth;
     private String TAG = "login";
+    private SharedPreferences mPref;
+    private SharedPreferences.Editor mEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         mAuth = FirebaseAuth.getInstance();
         mRoot = FirebaseDatabase.getInstance().getReference();
+
+        mPref = getSharedPreferences("data", MODE_PRIVATE);
+        mEditor = mPref.edit();
 
         go_btn.setOnClickListener(this);
 
@@ -86,6 +92,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         users.add(child.getKey());
                     }
                     if (users.contains(uid)){
+                        mEditor.putString("uid",uid);
+                        mEditor.commit();
                         anonymousLogin();
                     }else {
                         Toast.makeText(getApplicationContext(),"Incorrect reference no.",Toast.LENGTH_LONG).show();
@@ -109,7 +117,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInAnonymously:success");
                             mRef = mRoot.child("users").child(uid);
-                            mRef.setValue("auth_id",mAuth.getCurrentUser().getUid().toString());
+                            mRef.setValue("auth_id", mAuth.getCurrentUser().getUid());
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             FirebaseUser user = mAuth.getCurrentUser();
                         } else {

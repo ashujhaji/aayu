@@ -27,9 +27,21 @@
         <activity
             android:name=".activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.ProfileActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:label="Profile"/>
+        <activity
+            android:name=".activity.ProfileActivity"
+            android:label="Profile"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.PrescriptionActivity"
+            android:label="Prescription"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.MedicinesActivity"
+            android:label="Medicines"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.DoctorsActivity"
+            android:label="Doctors"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
