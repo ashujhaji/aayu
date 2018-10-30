@@ -19,7 +19,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.aayu.aayu.BuildConfig;
-import com.aayu.aayu.Model.Medicines;
 import com.aayu.aayu.R;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private DrawerLayout drawer;
     private FirebaseRemoteConfig firebaseRemoteConfig;
     private ImageView tip_img;
-    private CardView prescription, medicines, doctors, cghs;
+    private CardView prescription, medicines, doctors, cghs,myPresc, order ;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -52,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         medicines = findViewById(R.id.medicines);
         doctors = findViewById(R.id.doctors);
         cghs = findViewById(R.id.cghs);
+        myPresc = findViewById(R.id.myPresc);
+        order = findViewById(R.id.order);
 
         remoteConfigData();
 
@@ -61,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         medicines.setOnClickListener(this);
         doctors.setOnClickListener(this);
         cghs.setOnClickListener(this);
+        myPresc.setOnClickListener(this);
+        order.setOnClickListener(this);
 
         //navigation drawer setup
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -101,6 +104,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.cghs:
                 startActivity(new Intent(MainActivity.this, CghsActivity.class));
+                break;
+            case R.id.myPresc:
+                startActivity(new Intent(MainActivity.this, PrescriptionViewActivity.class));
+                break;
+            case R.id.order:
+                startActivity(new Intent(MainActivity.this, OrderActivity.class));
                 break;
         }
     }

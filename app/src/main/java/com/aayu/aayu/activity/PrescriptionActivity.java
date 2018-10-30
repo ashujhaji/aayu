@@ -128,6 +128,7 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
                                     Log.d("img_uri", uri.toString());
                             mRef.child(taskSnapshot.getMetadata().getName()).child("url").setValue(uri.toString());
                             mRef.child(taskSnapshot.getMetadata().getName()).child("delivery_stat").setValue("ordered");
+                            mRef.child("current_Pres").setValue(uri.toString());
                                 }
                             });
                             progressDialog.dismiss();
