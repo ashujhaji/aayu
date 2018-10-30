@@ -11,6 +11,7 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,6 +22,8 @@ import com.aayu.aayu.R;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -38,6 +41,7 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
     private FirebaseStorage storage;
     private StorageReference storageReference;
     private SharedPreferences mPref;
+    private DatabaseReference mRoot, mRef;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -60,6 +64,7 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
 
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
+        mRoot = FirebaseDatabase.getInstance().getReference();
 
         mPref = getSharedPreferences("data",MODE_PRIVATE);
 
@@ -108,11 +113,23 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
             progressDialog.setTitle("Uploading");
             progressDialog.show();
 
-            StorageReference ref = storageReference.child("prescription/"+mPref.getString("uid","")).child(createTransactionID());
+            mRef = mRoot.child("users")
+                    .child(mPref.getString("uid",""))
+                    .child("prescriptions");
+
+            final StorageReference ref = storageReference.child("prescription/"+mPref.getString("uid","")).child(createTransactionID());
             ref.putFile(imageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
+                            ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    Log.d("img_uri", uri.toString());
+                            mRef.child(taskSnapshot.getMetadata().getName()).child("url").setValue(uri.toString());
+                            mRef.child(taskSnapshot.getMetadata().getName()).child("delivery_stat").setValue("ordered");
+                                }
+                            });
                             progressDialog.dismiss();
                             Intent intent = new Intent(PrescriptionActivity.this, MainActivity.class);
                             startActivityForResult(intent, 1);

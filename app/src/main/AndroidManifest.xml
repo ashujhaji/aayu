@@ -43,9 +43,13 @@
             android:name=".activity.DoctorsActivity"
             android:label="Doctors"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.CghsActivity"
+        <activity
+            android:name=".activity.CghsActivity"
+            android:label="Nearby CGHS"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.PrescriptionViewActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:label="Nearby CGHS"/>
+            android:label="My Prescriptions"/>
     </application>
 
 </manifest>

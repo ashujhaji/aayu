@@ -1,35 +1,42 @@
 package com.aayu.aayu.activity;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.TextView;
 
+import com.aayu.aayu.Model.Prescriptions;
 import com.aayu.aayu.R;
+import com.aayu.aayu.adapters.PresViewPagerAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
-public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
+import java.util.ArrayList;
+import java.util.List;
+
+public class PrescriptionViewActivity extends AppCompatActivity {
 
     private DatabaseReference mRoot, mRef;
+    private ViewPager view_pager;
     private SharedPreferences mPref;
-    private TextView name, dob, mobile, ref, myPresc;
+    private List<Prescriptions> list = new ArrayList<>();
+    private PresViewPagerAdapter adapter;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_prescription_view);
 
         //set toolbar
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
@@ -40,45 +47,37 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         getWindow().setStatusBarColor(Color.WHITE);
         //end
 
-        name = findViewById(R.id.name);
-        dob = findViewById(R.id.dob);
-        mobile = findViewById(R.id.mobile);
-        ref = findViewById(R.id.ref);
-        myPresc = findViewById(R.id.myPresc);
-
         mRoot = FirebaseDatabase.getInstance().getReference();
-
         mPref = getSharedPreferences("data",MODE_PRIVATE);
 
-        myPresc.setOnClickListener(this);
+        view_pager = findViewById(R.id.view_pager);
 
-        userData();
+        adapter= new PresViewPagerAdapter(getSupportFragmentManager(), list);
+
+        prescriptions();
     }
 
-    private void userData(){
+    private void prescriptions(){
         mRef = mRoot.child("users")
-                .child(mPref.getString("uid",""));
+                .child(mPref.getString("uid",""))
+                .child("prescriptions");
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                         name.setText(dataSnapshot.child("name").getValue().toString());
-                         ref.setText(dataSnapshot.getKey());
-                         dob.setText(dataSnapshot.child("dob").getValue().toString());
-                         mobile.setText(dataSnapshot.child("mobile").getValue().toString());
-                     }
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                for (DataSnapshot child : children){
+                    list.add(new Prescriptions(child.getKey(),
+                            child.child("url").getValue().toString(),
+                            child.child("delivery_stat").getValue().toString()));
+                }
+                view_pager.setAdapter(adapter);
+
+            }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.myPresc:
-                startActivity(new Intent(ProfileActivity.this, PrescriptionViewActivity.class));
-                break;
-        }
     }
 }
