@@ -32,4 +32,12 @@
         <item name="actionMenuTextColor">@color/colorPrimary</item>
     </style>
 
+    <style name="MyMaterialUrltheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">#cccccc</item>
+    </style>
+
 </resources>

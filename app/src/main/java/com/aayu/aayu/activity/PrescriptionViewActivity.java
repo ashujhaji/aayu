@@ -8,7 +8,10 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.aayu.aayu.Model.Prescriptions;
 import com.aayu.aayu.R;
@@ -31,6 +34,7 @@ public class PrescriptionViewActivity extends AppCompatActivity {
     private SharedPreferences mPref;
     private List<Prescriptions> list = new ArrayList<>();
     private PresViewPagerAdapter adapter;
+    private ProgressBar progress;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -51,12 +55,31 @@ public class PrescriptionViewActivity extends AppCompatActivity {
         mPref = getSharedPreferences("data",MODE_PRIVATE);
 
         view_pager = findViewById(R.id.view_pager);
+        progress = findViewById(R.id.progress);
 
         adapter= new PresViewPagerAdapter(getSupportFragmentManager(), list);
 
         prescriptions();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId()== android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onNavigateUp() {
+        onBackPressed();
+        return super.onNavigateUp();
+    }
     private void prescriptions(){
         mRef = mRoot.child("users")
                 .child(mPref.getString("uid",""))
@@ -71,6 +94,7 @@ public class PrescriptionViewActivity extends AppCompatActivity {
                             child.child("delivery_stat").getValue().toString()));
                 }
                 view_pager.setAdapter(adapter);
+                progress.setVisibility(View.GONE);
 
             }
 

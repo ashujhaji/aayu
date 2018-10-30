@@ -25,13 +25,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
+import com.thefinestartist.finestwebview.FinestWebView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener{
     private RelativeLayout nav_drawer, profile;
     private DrawerLayout drawer;
     private FirebaseRemoteConfig firebaseRemoteConfig;
     private ImageView tip_img;
-    private CardView prescription, medicines, doctors, cghs,myPresc, order ;
+    private CardView prescription, medicines, doctors, cghs,myPresc, order, health_tips, diet_chart;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -53,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cghs = findViewById(R.id.cghs);
         myPresc = findViewById(R.id.myPresc);
         order = findViewById(R.id.order);
+        health_tips  = findViewById(R.id.health_tips);
+        diet_chart = findViewById(R.id.diet_chart);
 
         remoteConfigData();
 
@@ -64,6 +67,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cghs.setOnClickListener(this);
         myPresc.setOnClickListener(this);
         order.setOnClickListener(this);
+        health_tips.setOnClickListener(this);
+        diet_chart.setOnClickListener(this);
 
         //navigation drawer setup
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -110,6 +115,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.order:
                 startActivity(new Intent(MainActivity.this, OrderActivity.class));
+                break;
+            case R.id.health_tips:
+                new FinestWebView.Builder(MainActivity.this).show("https://www.onlymyhealth.com/");
+                break;
+            case R.id.diet_chart:
+                new FinestWebView.Builder(MainActivity.this).show("https://www.rd.com/health/wellness/healthy-living-tips/");
                 break;
         }
     }

@@ -49,14 +49,14 @@ public class OrderActivity extends AppCompatActivity implements  View.OnClickLis
         mRoot = FirebaseDatabase.getInstance().getReference();
 
         mRef = mRoot.child("users")
-                .child(mPref.getString("uid",""))
-                .child("prescriptions");
+                .child(mPref.getString("uid",""));
+
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
                     Glide.with(OrderActivity.this)
-                            .load(dataSnapshot.child("current_Pres").getValue().toString())
+                            .load(dataSnapshot.child("current_Pres").child("url").getValue().toString())
                             .into(current_img);
                 }
             }
@@ -66,6 +66,8 @@ public class OrderActivity extends AppCompatActivity implements  View.OnClickLis
 
             }
         });
+
+        current_txt.setText("Total Price"+"  :  "+"Rs.254");
 
         order_btn.setOnClickListener(this);
 

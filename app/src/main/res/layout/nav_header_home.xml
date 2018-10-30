@@ -11,7 +11,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="10dp"
-        app:srcCompat="@drawable/user_icon_dark"/>
+        app:srcCompat="@drawable/logo"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,7 +19,6 @@
         android:layout_below="@+id/imageView"
         android:gravity="center"
         android:textColor="@color/colorAccent"
-        android:textStyle="bold"
-        android:textSize="17dp"
+        android:textSize="18dp"
         />
 </LinearLayout>

@@ -45,7 +45,8 @@
                 android:gravity="center"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:id="@+id/current_price"/>
+                android:id="@+id/current_price"
+                android:textColor="@color/colorPrimaryDark"/>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
