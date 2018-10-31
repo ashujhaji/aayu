@@ -15,7 +15,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="AAYU"
+        android:text="Aayu"
         android:textStyle="bold"
         android:layout_below="@+id/imageView"
         android:gravity="center"

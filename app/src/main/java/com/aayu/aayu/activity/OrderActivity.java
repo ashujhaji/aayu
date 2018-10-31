@@ -67,7 +67,7 @@ public class OrderActivity extends AppCompatActivity implements  View.OnClickLis
             }
         });
 
-        current_txt.setText("Total Price"+"  :  "+"Rs.254");
+        current_txt.setText("Delivery charge"+"  :  "+"Rs.30");
 
         order_btn.setOnClickListener(this);
 

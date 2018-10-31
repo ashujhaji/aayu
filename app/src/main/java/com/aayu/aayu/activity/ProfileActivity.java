@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.aayu.aayu.R;
 import com.google.firebase.database.DataSnapshot;
@@ -79,14 +80,18 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private void userData(){
         mRef = mRoot.child("users_list")
                 .child(mPref.getString("uid",""));
+
+        Toast.makeText(getApplicationContext(),String.valueOf(mPref.getString("uid","")),Toast.LENGTH_LONG).show();
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                         name.setText(dataSnapshot.child("name").getValue().toString());
-                         ref.setText(dataSnapshot.getKey());
-                         dob.setText(dataSnapshot.child("dob").getValue().toString());
-                         mobile.setText(dataSnapshot.child("mobile").getValue().toString());
-                     }
+                if (dataSnapshot.exists()){
+//                    name.setText(dataSnapshot.child("name").getValue().toString());
+//                    ref.setText(dataSnapshot.getKey());
+//                    dob.setText(dataSnapshot.child("dob").getValue().toString());
+//                    mobile.setText(dataSnapshot.child("mobile").getValue().toString());
+                }
+               }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
