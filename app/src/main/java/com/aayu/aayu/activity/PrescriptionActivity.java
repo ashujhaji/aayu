@@ -6,11 +6,11 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,7 +18,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.aayu.aayu.R;
 import com.bumptech.glide.Glide;
@@ -135,8 +134,7 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
             progressDialog.show();
 
             mRef = mRoot.child("users")
-                    .child(mPref.getString("uid",""))
-                    .child("prescriptions");
+                    .child(mPref.getString("uid",""));
 
             final StorageReference ref = storageReference.child("prescription/"+mPref.getString("uid","")).child(createTransactionID());
             ref.putFile(imageUri)
@@ -147,9 +145,9 @@ public class PrescriptionActivity extends AppCompatActivity implements View.OnCl
                                 @Override
                                 public void onSuccess(Uri uri) {
                                     Log.d("img_uri", uri.toString());
-                            mRef.child(taskSnapshot.getMetadata().getName()).child("url").setValue(uri.toString());
-                            mRef.child(taskSnapshot.getMetadata().getName()).child("delivery_stat").setValue("ordered");
-                            mRef.child("current_Pres").setValue(uri.toString());
+                            mRef.child("prescriptions").child(taskSnapshot.getMetadata().getName()).child("url").setValue(uri.toString());
+                            mRef.child("prescriptions").child(taskSnapshot.getMetadata().getName()).child("delivery_stat").setValue("ordered");
+                            mRef.child("current_Pres").child("url").setValue(uri.toString());
                                 }
                             });
                             progressDialog.dismiss();

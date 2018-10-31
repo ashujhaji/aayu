@@ -40,9 +40,10 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Aayu"
-                android:textColor="@color/grey_800"
+                android:textColor="#41c9c5"
                 android:textSize="17dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/futura"/>
 
             <RelativeLayout
                 android:id="@+id/profile"

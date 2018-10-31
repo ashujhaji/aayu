@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void login(){
         uid = ref_id.getText().toString();
         if (uid.length()==7){
-            mRef = mRoot.child("users");
+            mRef = mRoot.child("users_list");
             mRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -117,7 +117,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInAnonymously:success");
                             mRef = mRoot.child("users").child(uid);
-                            mRef.setValue("auth_id", mAuth.getCurrentUser().getUid());
+//                            mRef.setValue("auth_id", mAuth.getCurrentUser().getUid());
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             FirebaseUser user = mAuth.getCurrentUser();
                         } else {

@@ -77,7 +77,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void userData(){
-        mRef = mRoot.child("users")
+        mRef = mRoot.child("users_list")
                 .child(mPref.getString("uid",""));
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
