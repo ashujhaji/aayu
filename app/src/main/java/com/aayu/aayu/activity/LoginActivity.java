@@ -26,6 +26,11 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * created by ashu jha
+ * ddibc 2018
+ */
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
     private EditText ref_id;
     private Button go_btn;

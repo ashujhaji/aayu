@@ -26,6 +26,11 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * created by ashu jha
+ * ddibc 2018
+ */
+
 public class MedicinesActivity extends AppCompatActivity {
     private List<Medicines> medicines = new ArrayList<>();
     private DatabaseReference mroot, mRef;

@@ -11,6 +11,11 @@ import android.view.WindowManager;
 import com.aayu.aayu.R;
 import com.google.firebase.auth.FirebaseAuth;
 
+/**
+ * created by ashu jha
+ * ddibc 2018
+ */
+
 public class SplashActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 

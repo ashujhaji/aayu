@@ -27,6 +27,11 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 import com.thefinestartist.finestwebview.FinestWebView;
 
+/**
+ * created by ashu jha
+ * ddibc 2018
+ */
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener{
     private RelativeLayout nav_drawer, profile;
     private DrawerLayout drawer;
